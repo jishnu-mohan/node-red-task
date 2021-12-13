@@ -1,0 +1,131 @@
+[
+    {
+        "id": "812dbc90e27d059b",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2c38c2c29799b787",
+        "type": "inject",
+        "z": "812dbc90e27d059b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "93e277ce5c151fc6"
+            ]
+        ]
+    },
+    {
+        "id": "93e277ce5c151fc6",
+        "type": "function",
+        "z": "812dbc90e27d059b",
+        "name": "generate random matrix",
+        "func": "// Generate some random data\nlet len = 200;\n\nmsg.payload = [];\n\nwhile (len--) {\n  let value = Math.floor(Math.random()*200);\n  msg.payload.push(value);\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "69ad815eefaf2bc9"
+            ]
+        ]
+    },
+    {
+        "id": "694d48d2de045629",
+        "type": "ui_svg_graphics",
+        "z": "812dbc90e27d059b",
+        "group": "2e442781.0c5608",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "svgString": "<svg x=\"0\" y=\"0\" height=\"200\" viewBox=\"0 0 200 200\" width=\"200\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<!-- Add here your SVG shapes (circles, rectangles, ...) -->\n<!-- Or remove everything, if you want to paste an entire drawing (<svg...>...</svg>).-->\n</svg>",
+        "clickableShapes": [],
+        "javascriptHandlers": [],
+        "smilAnimations": [],
+        "bindings": [],
+        "showCoordinates": false,
+        "autoFormatAfterEdit": false,
+        "showBrowserErrors": false,
+        "showBrowserEvents": false,
+        "enableJsDebugging": false,
+        "sendMsgWhenLoaded": false,
+        "noClickWhenDblClick": false,
+        "outputField": "payload",
+        "editorUrl": "//drawsvg.org/drawsvg.html",
+        "directory": "",
+        "panning": "disabled",
+        "zooming": "disabled",
+        "panOnlyWhenZoomed": false,
+        "doubleClickZoomEnabled": false,
+        "mouseWheelZoomEnabled": false,
+        "dblClickZoomPercentage": 150,
+        "cssString": "div.ui-svg svg{\n    color: var(--nr-dashboard-widgetColor);\n    fill: currentColor !important;\n}\ndiv.ui-svg path {\n    fill: inherit;\n}",
+        "name": "",
+        "x": 800,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69ad815eefaf2bc9",
+        "type": "function",
+        "z": "812dbc90e27d059b",
+        "name": "create point",
+        "func": "const randomArray = msg.payload\n\nconst p1 = randomArray[0]\nconst p2 = randomArray[1]\n\nmsg.payload = {\n   \"command\": \"add_element\", \n   \"elementType\": \"circle\",\n   \"elementId\": \"extra_circle\", \n   \"elementAttributes\": {\n      \"cx\": p1,\n      \"cy\": p2,\n      \"r\": \"1\"\n   },\n   \"elementStyleAttributes\": {\n      \"fill\": \"red\",\n      \"stroke\": \"black\"\n   },\n   \"textContent\": \"my content\"\n}\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "694d48d2de045629"
+            ]
+        ]
+    },
+    {
+        "id": "2e442781.0c5608",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "4779176.99cd2e8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "4779176.99cd2e8",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
